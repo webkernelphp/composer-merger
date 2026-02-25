@@ -1,27 +1,50 @@
 {
-    "name": "wikimedia/composer-merge-plugin",
-    "description": "Composer plugin to merge multiple composer.json files",
+    "name": "webkernel/merge-modules-dependencies",
+    "description": "Composer plugin to merge multiple composer.json files — Webkernel edition with bundled core dependencies",
     "type": "composer-plugin",
     "license": "MIT",
     "authors": [
         {
             "name": "Bryan Davis",
             "email": "bd808@wikimedia.org"
+        },
+        {
+            "name": "Numerimondes",
+            "email": "webkernel@numerimondes.com"
         }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.4.0",
-        "composer-plugin-api": "^1.1||^2.0"
+        "php": "^8.4",
+        "composer-plugin-api": "^2.0",
+        "calebporzio/sushi": "^2.5",
+        "filament/filament": "^5.0",
+        "jeremykendall/php-domain-parser": "^6.4",
+        "laravel/framework": "^12.0",
+        "laravel/octane": "^2.12",
+        "laravel/prompts": "^0.3.8",
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.10.1",
+        "nikic/php-parser": "^5.7"
     },
     "require-dev": {
         "ext-json": "*",
-        "composer/composer": "^1.1||^2.0",
-        "mediawiki/mediawiki-phan-config": "0.11.1",
+        "composer/composer": "^2.0",
+        "barryvdh/laravel-ide-helper": "^3.6",
+        "fakerphp/faker": "^1.23",
+        "fruitcake/laravel-debugbar": "^4.0",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^4.1.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
         "php-parallel-lint/php-parallel-lint": "~1.3.1",
         "phpspec/prophecy-phpunit": "~2.0.1",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^11.0",
+        "psr/log": "^3.0",
         "squizlabs/php_codesniffer": "~3.7.1"
     },
     "autoload": {
@@ -29,29 +52,47 @@
             "Wikimedia\\Composer\\Merge\\V2\\": "src/"
         }
     },
+    "keywords": [
+        "webkernel",
+        "composer",
+        "merge",
+        "dependencies",
+        "bundle",
+        "laravel",
+        "filament",
+        "ecosystem"
+    ],
     "extra": {
         "branch-alias": {
-             "dev-master": "2.x-dev"
+            "dev-master": "2.x-dev"
         },
         "class": "Wikimedia\\Composer\\Merge\\V2\\MergePlugin"
     },
     "config": {
         "optimize-autoloader": true,
-        "sort-packages": true
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.4.0"
+        }
     },
     "scripts": {
-        "coverage": [
-            "phpunit --log-junit=reports/unitreport.xml --coverage-text --coverage-html=reports/coverage --coverage-clover=reports/coverage.xml",
-            "phpcs --encoding=utf-8 --standard=PSR2 --report-checkstyle=reports/checkstyle-phpcs.xml --report-full --extensions=php src/* tests/phpunit/*"
-        ],
-        "phan": "phan -d . --long-progress-bar --allow-polyfill-parser",
-        "phpcs": "phpcs --encoding=utf-8 --standard=PSR2 --extensions=php src/* tests/phpunit/*",
-        "phpunit": "phpunit",
         "test": [
             "composer validate --no-interaction",
             "parallel-lint src tests",
             "@phpunit",
             "@phpcs"
-        ]
+        ],
+        "phpunit": "phpunit",
+        "phpcs": "phpcs --encoding=utf-8 --standard=PSR2 --extensions=php src/* tests/phpunit/*",
+        "coverage": [
+            "phpunit --log-junit=reports/unitreport.xml --coverage-text --coverage-html=reports/coverage --coverage-clover=reports/coverage.xml",
+            "phpcs --encoding=utf-8 --standard=PSR2 --report-checkstyle=reports/checkstyle-phpcs.xml --report-full --extensions=php src/* tests/phpunit/*"
+        ],
+        "phan": "phan -d . --long-progress-bar --allow-polyfill-parser"
     }
 }
