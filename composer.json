@@ -1,8 +1,8 @@
 {
-    "name": "webkernel/merge-modules-dependencies",
+    "name": "webkernel/composer-merger",
     "description": "Composer plugin to merge multiple composer.json files — Webkernel edition with bundled core dependencies",
     "type": "composer-plugin",
-    "license": "MIT",
+    "license": "EPL-2.0",
     "authors": [
         {
             "name": "Bryan Davis",
@@ -15,6 +15,16 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "keywords": [
+        "webkernel",
+        "composer",
+        "merge",
+        "dependencies",
+        "bundle",
+        "laravel",
+        "filament",
+        "ecosystem"
+    ],
     "require": {
         "php": "^8.4",
         "composer-plugin-api": "^2.0",
@@ -52,16 +62,6 @@
             "Wikimedia\\Composer\\Merge\\V2\\": "src/"
         }
     },
-    "keywords": [
-        "webkernel",
-        "composer",
-        "merge",
-        "dependencies",
-        "bundle",
-        "laravel",
-        "filament",
-        "ecosystem"
-    ],
     "extra": {
         "branch-alias": {
             "dev-master": "2.x-dev"
